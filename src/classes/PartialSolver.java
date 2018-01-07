@@ -12,7 +12,6 @@ public class PartialSolver implements Runnable {
 	public PartialSolver(Node root, String[][] letters) {
 		Root = root;
 		Letters = letters;
-		// checker = new WordChecker();
 	}
 
 	@Override
@@ -27,9 +26,5 @@ public class PartialSolver implements Runnable {
 		}
 		checker.ShowWords();
 	}
-
-	// public static WordChecker getWordChecker() {
-	// return checker;
-	// }
 
 }

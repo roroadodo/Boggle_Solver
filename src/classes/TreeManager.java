@@ -35,7 +35,8 @@ public class TreeManager {
 
 	private void addToTree(Node parent, Node child) {
 		Height++;
-		if (Height < 10) {
+		//90% of English words are under 13 characters long
+		if (Height < 13) {
 			parent.add(child);
 
 			board.blockPosition(child);
