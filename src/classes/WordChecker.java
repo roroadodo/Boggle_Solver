@@ -5,14 +5,14 @@ import java.util.List;
 
 public class WordChecker {
 	private List<String> ValidWords;
-	private EngDictionary Dictionary;
+	private static EngDictionary Dictionary;
 
 	public WordChecker() {
 		ValidWords = new ArrayList<String>();
-		Dictionary = new EngDictionary();
+		Dictionary = EngDictionary.getDictInstance();
 	}
 
-	public void handle(String word) {
+	 public void handle(String word) {
 		if (word.length() >= 3 && !ValidWords.contains(word) && Dictionary.contains(word)) {
 			ValidWords.add(word);
 		}

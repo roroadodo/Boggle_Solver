@@ -7,10 +7,12 @@ public class TreeManager {
 	private Node Root;
 	private Board board;
 	private List<String> words;
+	private int Height;
 
 	public TreeManager(Node rt) {
 		Root = rt;
 		words = new ArrayList<String>();
+		Height = 0;
 	}
 
 	public void setBoard(String[][] letters) {
@@ -32,21 +34,26 @@ public class TreeManager {
 	}
 
 	private void addToTree(Node parent, Node child) {
-		parent.add(child);
+		Height++;
+		if (Height < 10) {
+			parent.add(child);
 
-		board.blockPosition(child);
-		ArrayList<Node> grandchildren = board.getNeighbors(child);
+			board.blockPosition(child);
+			ArrayList<Node> grandchildren = board.getNeighbors(child);
 
-		for (Node grandchild : grandchildren) {
-			addToTree(child, grandchild);
+			for (Node grandchild : grandchildren) {
+				addToTree(child, grandchild);
+			}
+
+			board.unBlockPosition(child);
 		}
-
-		board.unBlockPosition(child);
+		Height--;
 	}
+
 	private void findWords(Node node, String word) {
 		word = word + node;
 		words.add(word);
-		for(Node child : node.getChildren()) {
+		for (Node child : node.getChildren()) {
 			findWords(child, word);
 		}
 	}

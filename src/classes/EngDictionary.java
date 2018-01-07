@@ -1,5 +1,6 @@
 package classes;
 
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,8 +11,9 @@ public class EngDictionary {
 	private Map<String, String> Words;
 	private File File;
 	private Scanner InputFile;
-
-	public EngDictionary() {
+	private static EngDictionary dictionary;
+	
+	private EngDictionary() {
 		Words = new HashMap<String, String>();
 		File = new File("./wordsEn.txt");
 
@@ -31,6 +33,13 @@ public class EngDictionary {
 		return Words.containsKey(word);
 	}
 
+	public static synchronized EngDictionary getDictInstance() {
+		if(dictionary == null) {
+			dictionary = new EngDictionary();
+		}
+		return dictionary;
+	}
+	
 	private void addWordsToDictionary() {
 		while (InputFile.hasNext()) {
 			String word = InputFile.nextLine();
